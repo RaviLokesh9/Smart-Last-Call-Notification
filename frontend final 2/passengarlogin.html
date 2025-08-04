@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Passenger Login</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.concentric.io/wp-content/uploads/2023/08/Untitled-design-35-1200x600-1.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-left img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-left h2 {
+            margin: 0;
+        }
+
+        .navbar-right a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .navbar-right a:hover {
+            color: #28A745;
+        }
+
+        /* Form Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 450px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #28A745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image"></div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="logo.ico" alt="Flight Logo">
+            <h2>Flight Board</h2>
+        </div>
+        <div class="navbar-right">
+            <a href="mainpage.html">Back to Login</a>
+            <a href="about.html">About</a>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="container">
+        <h1>Flight Passenger Login</h1>
+        <form id="detailsForm">
+            <label for="pnr">PNR Number:</label>
+            <input type="text" id="pnr" name="pnr" placeholder="PNR/Booking Reference" required>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            <button type="submit">Get Details</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('detailsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const pnr = document.getElementById('pnr').value;
+            const lastName = document.getElementById('lastName').value;
+            window.location.href = `passengardetails.html?pnr=${encodeURIComponent(pnr)}&lastName=${encodeURIComponent(lastName)}`;
+        });
+    </script>
+</body>
+</html>

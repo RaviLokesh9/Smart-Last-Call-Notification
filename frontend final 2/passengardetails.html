@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Departure Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('passengerlogin.jpg') no-repeat center center/cover;
+            margin: 0;
+        }
+
+        .departure-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 50px 100px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .info-label {
+            font-weight: bold;
+        }
+
+        .info-value {
+            color: #007bff;
+        }
+
+        .hold-yes {
+            color: red;
+            font-weight: bold;
+        }
+
+        .hold-no {
+            color: green;
+            font-weight: bold;
+        }
+
+        .hold-reason {
+            color: orange;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="departure-container">
+        <h2>Flight Departure Info</h2>
+        
+        <div class="info-item">
+            <span class="info-label">Departure Time:</span>
+            <span class="info-value">14:30</span>
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Gate Number:</span>
+            <span class="info-value">B12</span>
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Status:</span>
+            <span class="info-value">N/B</span>
+        </div>
+
+        <!-- New Luggage ID field -->
+        <div class="info-item">
+            <span class="info-label">Luggage ID:</span>
+            <span class="info-value">12345678</span> <!-- Update dynamically -->
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Luggage on Hold:</span>
+            <span class="info-value hold-yes">Yes</span> <!-- Change dynamically -->
+        </div>
+
+        <!-- New Hold Reason field -->
+        <div class="info-item">
+            <span class="info-label">Reason for Hold:</span>
+            <span class="info-value hold-reason">Security Check Required</span> <!-- Update dynamically -->
+        </div>
+    </div>
+
+</body>
+</html>

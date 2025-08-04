@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Passenger Details</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.concentric.io/wp-content/uploads/2023/08/Untitled-design-35-1200x600-1.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #373737;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1rem;
+            font-size: 1rem;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #FFD700;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 450px;
+            padding: 20px;
+            margin-top: 80px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #28A745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .details-container {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .reenter-btn {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #a2a2a2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image"></div>
+    <nav>
+        <div class="logo">FlightBoard</div>
+        <div>
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+    <div class="container" id="formContainer">
+        <h1>Flight Passenger Details</h1>
+        <form id="detailsForm">
+            <label for="pnr">PNR Number:</label>
+            <input type="text" id="pnr" name="pnr" required>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+            <button type="submit">Get Details</button>
+        </form>
+    </div>
+    <div id="passengerDetails" class="details-container"></div>
+    <script>
+        document.getElementById('detailsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const pnr = document.getElementById('pnr').value;
+            const lastName = document.getElementById('lastName').value;
+            fetchPassengerDetails(pnr, lastName)
+                .then(data => displayPassengerDetails(data))
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to fetch passenger details. Please try again.');
+                });
+        });
+
+        function fetchPassengerDetails(pnr, lastName) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        pnr: pnr,
+                        lastName: lastName,
+                        firstName: 'John',
+                        flightNumber: 'AA123',
+                        departure: 'New York (JFK)',
+                        destination: 'Los Angeles (LAX)',
+                        departureTime: '10:00 AM',
+                        arrivalTime: '1:00 PM',
+                        seatNumber: '24A',
+                        status: 'On Time'
+                    });
+                }, 1000);
+            });
+        }
+
+        function displayPassengerDetails(data) {
+            document.getElementById('formContainer').style.display = 'none';
+            const detailsContainer = document.getElementById('passengerDetails');
+            detailsContainer.style.display = 'block';
+            detailsContainer.innerHTML = `
+                <h2>Passenger Details</h2>
+                <p><strong>PNR:</strong> ${data.pnr}</p>
+                <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
+                <p><strong>Flight Number:</strong> ${data.flightNumber}</p>
+                <p><strong>Departure:</strong> ${data.departure}</p>
+                <p><strong>Destination:</strong> ${data.destination}</p>
+                <p><strong>Departure Time:</strong> ${data.departureTime}</p>
+                <p><strong>Arrival Time:</strong> ${data.arrivalTime}</p>
+                <p><strong>Seat Number:</strong> ${data.seatNumber}</p>
+                <p><strong>Status:</strong> ${data.status}</p>
+                <button class="reenter-btn" onclick="reEnterDetails()">Re-enter Details</button>
+            `;
+        }
+
+        function reEnterDetails() {
+            document.getElementById('formContainer').style.display = 'block';
+            document.getElementById('passengerDetails').style.display = 'none';
+            document.getElementById('pnr').value = '';
+            document.getElementById('lastName').value = '';
+        }
+    </script>
+</body>
+</html>

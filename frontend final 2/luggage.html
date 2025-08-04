@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luggage Hold Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('luggage.jpg'); /* Replace with actual image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: none;
+        }
+
+        .hold-reason { color: orange; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Luggage Hold Notification</h2>
+
+        <label for="baggageId">Baggage ID:</label>
+        <input type="text" id="baggageId" placeholder="Enter Baggage ID">
+
+        <label for="holdReason">Reason for Hold:</label>
+        <select id="holdReason">
+            <option value="Security Check Required">Security Check Required</option>
+            <option value="Oversized Baggage">Oversized Baggage</option>
+            <option value="Weight Exceeded Limit">Weight Exceeded Limit</option>
+            <option value="Prohibited Items Detected">Prohibited Items Detected</option>
+            <option value="Improper Tagging">Improper Tagging</option>
+            <option value="Customs Clearance Issue">Customs Clearance Issue</option>
+            <option value="Delayed Transfer">Delayed Transfer</option>
+        </select>
+
+        <button onclick="sendNotification()">Notify Passenger</button>
+
+        <p id="notificationMessage" class="message"></p>
+    </div>
+
+    <script>
+        function sendNotification() {
+            const baggageId = document.getElementById("baggageId").value.trim();
+            const holdReason = document.getElementById("holdReason").value;
+            const messageElement = document.getElementById("notificationMessage");
+
+            if (!baggageId) {
+                alert("Please enter Baggage ID.");
+                return;
+            }
+
+            let message = `Dear Passenger, your baggage (ID: ${baggageId}) is on hold due to: ${holdReason}. Please contact airport staff for further assistance.`;
+
+            messageElement.textContent = message;
+            messageElement.className = "message hold-reason";
+            messageElement.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>

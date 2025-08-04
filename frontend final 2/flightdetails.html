@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('flight2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+        }
+
+        .flight-info-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 20px 30px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-label {
+            font-weight: bold;
+        }
+
+        .info-value {
+            color: #007bff;
+        }
+
+        .info-value input {
+            width: 100px;
+            font-size: 1.1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            text-align: center;
+            display: none; /* Initially hidden */
+        }
+
+        .final-call {
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .alert-btn {
+            background-color: #ff6347;
+            color: white;
+        }
+
+        .alert-btn:hover {
+            background-color: #e5533b;
+        }
+
+        .ignore-btn {
+            background-color: #d3d3d3;
+            color: black;
+        }
+
+        .ignore-btn:hover {
+            background-color: #b0b0b0;
+        }
+
+        .edit-btn {
+            margin-top: 15px;
+            background-color: #007bff;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .option-buttons button {
+            width: 100%;
+            margin: 5px 0;
+            background-color: #007bff;
+            color: white;
+        }
+
+        .option-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .ongoing-call {
+            color: green;
+            font-weight: bold;
+        }
+
+        .operation-abort {
+            color: red;
+            font-weight: bold;
+        }
+
+        .boarding {
+            color: green;
+            font-weight: bold;
+        }
+
+        .final-call-status {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .gate-closed {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flight-info-container" id="flightInfo">
+        <h2>Flight Departure Information</h2>
+        
+        <div class="info-item">
+            <span class="info-label">Departure Time:</span>
+            <span class="info-value" id="departureTime">14:30</span>
+            <input type="text" id="departureTimeInput" value="14:30">
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Gate Number:</span>
+            <span class="info-value" id="gateNumber">B12</span>
+            <input type="text" id="gateNumberInput" value="B12">
+        </div>
+
+        <div class="info-item final-call">
+            <span class="info-label">Final Call:</span>
+            <span id="finalCallStatus" class="info-value">Board Immediately</span>
+        </div>
+
+        <div class="button-container">
+            <button class="alert-btn" onclick="setAlert()">Alert</button>
+            <button class="ignore-btn" onclick="setIgnore()">Ignore</button>
+        </div>
+
+        <div class="option-buttons">
+            <button onclick="setStatus('Check-in Open')">Check-in</button>
+            <button onclick="setStatus('Boarding', 'boarding')">Boarding</button>
+            <button onclick="setStatus('Final Call', 'final-call-status')">Final Call</button>
+            <button onclick="setStatus('Gate Closed', 'gate-closed')">Gate Closed</button>
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Status:</span>
+            <span id="flightStatus" class="info-value">Waiting</span>
+        </div>
+    </div>
+
+    <button class="edit-btn" id="editButton" onclick="toggleEditMode()">Edit</button>
+
+    <script>
+        function setAlert() {
+            const status = document.getElementById("finalCallStatus");
+            status.textContent = "Ongoing Call";
+            status.className = "info-value ongoing-call";
+        }
+
+        function setIgnore() {
+            const status = document.getElementById("finalCallStatus");
+            status.textContent = "Operation Abort!";
+            status.className = "info-value operation-abort";
+        }
+
+        function setStatus(status, className) {
+            const flightStatus = document.getElementById("flightStatus");
+            flightStatus.textContent = status;
+            flightStatus.className = `info-value ${className || ''}`;
+        }
+
+        function toggleEditMode() {
+            const editButton = document.getElementById("editButton");
+
+            const departureTime = document.getElementById("departureTime");
+            const gateNumber = document.getElementById("gateNumber");
+
+            const departureTimeInput = document.getElementById("departureTimeInput");
+            const gateNumberInput = document.getElementById("gateNumberInput");
+
+            if (editButton.textContent === "Edit") {
+                // Show input fields, hide text
+                departureTime.style.display = "none";
+                gateNumber.style.display = "none";
+
+                departureTimeInput.style.display = "inline-block";
+                gateNumberInput.style.display = "inline-block";
+
+                editButton.textContent = "Save";
+            } else {
+                // Save input values back to text spans
+                departureTime.textContent = departureTimeInput.value;
+                gateNumber.textContent = gateNumberInput.value;
+
+                // Show text, hide input fields
+                departureTime.style.display = "inline-block";
+                gateNumber.style.display = "inline-block";
+
+                departureTimeInput.style.display = "none";
+                gateNumberInput.style.display = "none";
+
+                editButton.textContent = "Edit";
+            }
+        }
+    </script>
+
+</body>
+</html>

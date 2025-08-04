@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Board Homepage</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('homepage.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Flight Board Section -->
+  <div class="w-full max-w-3xl p-6 rounded-2xl shadow-xl bg-white/80 backdrop-blur-md text-center">
+    <h1 class="text-4xl font-bold mb-4 flex items-center justify-center">
+      <img src="logo.ico" alt="Flight Icon" class="w-10 h-10 mr-3">
+      Flight Board
+    </h1>
+    <p class="text-lg text-gray-600">Check your flight schedules and updates</p>
+  </div>
+
+  <!-- Login Section with Dropdown -->
+  <div class="mt-10">
+    <label for="user-type" class="block text-lg font-semibold mb-2">Select User Type:</label>
+    <select id="user-type" class="block w-60 p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent">
+      <option value="passenger">Passenger</option>
+      <option value="staff">Staff</option>
+    </select>
+
+    <button id="loginButton" class="mt-5 px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg bg-blue-600 text-white hover:bg-blue-700">
+      Login
+    </button>
+  </div>
+
+  <script>
+    document.getElementById('loginButton').addEventListener('click', function() {
+      const userType = document.getElementById('user-type').value;
+      if (userType === 'passenger') {
+        window.location.href = 'passengarlogin.html'; // Redirect to passenger login page
+      } else if (userType === 'staff') {
+        window.location.href = 'staff.html'; // Redirect to staff login page
+      }
+    });
+  </script>
+</body>
+</html>
